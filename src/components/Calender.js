@@ -4,7 +4,7 @@ import { CalenderStyle } from "../styles";
 
 
 //localstorage에 yearmonth로 저장 ex) key:2023_7, value:{4:[{todo:'밥먹기',isclear:true}]}, 5:[{todo:'자기', isclear:true}]
-export function Calender ({time,DateInfo}) {
+export function Calender ({time,DateInfo,setUpdating}) {
     let {year,setyear,month,setmonth,setdate} = DateInfo;
     let end_day = [31,28,31,30,31,30,31,31,30,31,30,31];
     const get_first_day = (in_year,in_month) => {
@@ -41,7 +41,12 @@ export function Calender ({time,DateInfo}) {
                             last_todo++;
                         }
                     }
-                    table[0][i].todo = `${last_todo}개 남음` 
+                    if(last_todo == 0) {
+                        table[0][i].todo = '할일 다함' 
+                    } else {
+                        table[0][i].todo = `${last_todo}개 남음`
+                    }
+                    
                 }
             }
             num++;
@@ -61,7 +66,11 @@ export function Calender ({time,DateInfo}) {
                                 last_todo++;
                             }
                         }
-                        table[i][j].todo = `${last_todo}개 남음` 
+                        if(last_todo == 0) {
+                            table[i][j].todo = '할일 다함' 
+                        } else {
+                            table[i][j].todo = `${last_todo}개 남음`
+                        }
                     }
                 }
                 num++;

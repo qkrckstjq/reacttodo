@@ -12,7 +12,6 @@ export const GlobalStyle = createGlobalStyle`
     }
 `
 export const Headstyle = styled.header`
-    position:relative;
     width:100vw;
     height:15vh;
     background-color:#eee;
@@ -21,22 +20,6 @@ export const Headstyle = styled.header`
     justify-content:center;
     font-size:30px;
     text-align:center;
-
-    > h1 {
-        
-    }
-
-    > button {
-        position:absolute;
-        right:150px;
-        font-size:40px;
-        border:0px;
-        color:gray;
-        &:hover {
-            color:black;
-            transition:0.5s
-        }
-    }
 `
 
 export const Mainstyle = styled.main`
@@ -88,12 +71,102 @@ export const Mainstyle = styled.main`
         }
     }
 `
+export const Graph = styled.div`
+    margin-right:60px;
+    display:flex;
+    justify-content:space-around;
+    align-items:end;
+    position:relative;
+    overflow:hidden;
+    >span {
+        position:absolute;
+        width:100%;
+        height: 2px;
+        background-color:black;
+        bottom:70px;
+    }
+
+    > div {
+        position:relative;
+        width:50px;
+        height:50px;
+        background-color:gray;
+        margin-bottom:72px;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        transition:all 1s;
+        &:hover{
+            >div:nth-child(4) {
+                visibility:visible;
+                opacity:1;
+            }
+        }
+        > div:nth-child(1) {
+            position:absolute;
+            bottom:0;
+            left:0;
+            width:100%;
+            height:50%;
+            background-color:lightblue;
+            transition:all 1s;
+        }
+        > span:nth-child(2) {
+            position:absolute;
+            bottom:-30px;
+            font-size:20px;
+        }
+        > span:nth-child(3) {
+            position:absolute;
+            bottom:-50px;
+            font-size:20px;
+            font-weight:600;
+        }
+        > div:nth-child(4){
+            position:absolute;
+            display:flex;
+            visibility:hidden;
+            opacity:0;
+            justify-content:center;
+            align-items:center;
+            border-radius:10px;
+            width:60px;
+            height:50px;
+            background-color:white;
+            border:1px solid black;
+            top:-20px;
+            left:-20px;
+            transition:all 0.5s
+        }
+    }
+
+    > div:nth-child(1){
+        position:absolute;
+        top:5px;
+        left:5px;
+        width:20px;
+        background-color:#eee;
+        >button{
+            margin-bottom:5px;
+            width:100%;
+            height:50%;
+            border-radius:5px;
+            border:0px;
+            background-color:lightgray;
+            &:hover{
+                cursor: pointer;
+            }
+        }
+    }
+    
+`
 
 export const StyleLi = styled.li`
     display:flex;
     width:90%;
     height:50px;
-    transition:all 0.1s;
+    min-height:50px;
     align-items:center;
     justify-content:center;
     
@@ -144,6 +217,7 @@ export const StyleAddLi = styled.li`
     text-align:center;
     width:90%;
     height:50px;
+    min-height:50px;
     >button {
         width:100%;
         height:100%;
@@ -155,12 +229,15 @@ export const StyleAddLi = styled.li`
     }
 `
 
+
+
 export const AsideStyle = styled.aside`
     position:fixed;
     top:0px;
     right:-650px;
     width:700px;
     height:100vh;
+    z-index:50;
     background-color:rgba(0,0,0,0.7);
     >div{
         display:none;
@@ -180,7 +257,7 @@ export const CalenderStyle = styled.div`
     justify-content:center;
     align-items:center;
     flex-direction:column;
-
+    z-index:60;
     >h1{
         letter-spacing:5px;
         color:#eee;
