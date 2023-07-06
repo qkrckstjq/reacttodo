@@ -1,5 +1,6 @@
 리액트로 투두페이지를 구현함
-링크 : reacttodo-topaz.vercel.app
+
+[링크] (https://reacttodo-topaz.vercel.app/)
 
 리액트,styled-components사용
 
@@ -8,5 +9,5 @@
 CRUD : TODO를 남길 수 있고, 삭제, 수정 가능
 그래프 : TODO의 상태를 가져와서 그래프로 보여줌
 
-![투두기능달력](https://github.com/qkrckstjq/reacttodo/assets/117289923/3567966f-f0b2-4ca3-a04d-350d7cc1486f)
-![투두기능](https://github.com/qkrckstjq/reacttodo/assets/117289923/8dea3c38-ed9c-4ca0-b948-cf4847d3251c)
+![투두기능](https://github.com/qkrckstjq/reacttodo/assets/117289923/e3631096-f60c-4d19-9da4-f32dad252d91)
+![투두기능달력](https://github.com/qkrckstjq/reacttodo/assets/117289923/9eb0fa3d-d523-42f6-b482-3f48f3d89031)
