@@ -11,7 +11,7 @@ export function Main ({DateInfo,setUpdating,Updating}) {
     let ALL_local = JSON.parse(localStorage.getItem(`${year}_${month}`)) || {}
     let local_list = ALL_local[date] || []
     let weeks = ['일','월','화','수','목','금','토']
-    let end_day = [31,28,31,30,31,30,31,31,30,31,30,31];
+    let end_day = [31,(year%4===0 && year % 100 !==0) || year % 400 === 0 ? 29 : 28,31,30,31,30,31,31,30,31,30,31];
     let last_todo = 0;
     let [scale,setScale] = useState(100);
     for(let i = 0; i < local_list.length; i++){
@@ -112,35 +112,100 @@ export function Main ({DateInfo,setUpdating,Updating}) {
         startOfWeek.setDate(date.getDate() - dayOfWeek);
         const endOfWeek = new Date(startOfWeek);
         endOfWeek.setDate(startOfWeek.getDate() + 6);
+        console.log(startOfWeek.getDate(), endOfWeek.getDate());
         let week = 0;
-        for(let i = startOfWeek.getDate(); i <= endOfWeek.getDate(); i++){
-            if(ALL_local[i]) {
-                let did = 0;
-                for(let j = 0; j < ALL_local[i].length; j++){
-                    if(ALL_local[i][j].isclear) {
-                        did+=1;
+        if(startOfWeek.getDate() <= endOfWeek.getDate()) {
+            for(let i = startOfWeek.getDate(); i <= endOfWeek.getDate(); i++){
+                if(ALL_local[i]) {
+                    let did = 0;
+                    for(let j = 0; j < ALL_local[i].length; j++){
+                        if(ALL_local[i][j].isclear) {
+                            did+=1;
+                        }
+                    }
+                    arr.push({
+                        date : i,
+                        day : weeks[week],
+                        month : month,
+                        did : did,
+                        todo : ALL_local[i].length
+                    })
+                } else {
+                    arr.push({
+                        date : i,
+                        day : weeks[week],
+                        month : month,
+                        did : 0,
+                        todo : 0
+                    })
+                }
+                week++;
+            }
+        } else {
+            if(startOfWeek.getMonth()+1 == month-1) {
+                week = 6;
+                for(let i = endOfWeek.getDate(); i >= 1; i--) {
+                    if(ALL_local[i]) {
+                        let did = 0;
+                        for(let j = 0; j < ALL_local[i].length; j++){
+                            if(ALL_local[i][j].isclear) {
+                                did+=1;
+                            }
+                        }
+                        arr.unshift({
+                            date : i,
+                            day : weeks[week],
+                            month : month,
+                            did : did,
+                            todo : ALL_local[i].length
+                        })
+                    } else {
+                        arr.unshift({
+                            date : i,
+                            day : weeks[week],
+                            month : month,
+                            did : 0,
+                            todo : 0
+                        })
                     }
                 }
-                arr.push({
-                    date : i,
-                    day : weeks[week],
-                    month : month,
-                    did : did,
-                    todo : ALL_local[i].length
-                })
+                week--;
             } else {
-                arr.push({
-                    date : i,
-                    day : weeks[week],
-                    month : month,
-                    did : 0,
-                    todo : 0
-                })
+                week = 0;
+                for(let i = startOfWeek.getDate(); i <= end_day[month]; i++) {
+                    if(ALL_local[i]) {
+                        let did = 0;
+                        for(let j = 0; j < ALL_local[i].length; j++){
+                            if(ALL_local[i][j].isclear) {
+                                did+=1;
+                            }
+                        }
+                        arr.push({
+                            date : i,
+                            day : weeks[week],
+                            month : month,
+                            did : did,
+                            todo : ALL_local[i].length
+                        })
+                    } else {
+                        arr.push({
+                            date : i,
+                            day : weeks[week],
+                            month : month,
+                            did : 0,
+                            todo : 0
+                        })
+                    }
+                }
+                week++;
             }
-            week++;
+            
         }
+        
         return arr;
     }
+    console.log(year, month, date, ALL_local)
+    console.log(MakeWeekRange(year,month,date,ALL_local));
     
     return (
         <Mainstyle>
