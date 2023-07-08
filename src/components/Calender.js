@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { CalenderStyle } from "../styles";
 
 
@@ -42,7 +41,7 @@ export function Calender ({time,DateInfo,setUpdating}) {
                         }
                     }
                     if(last_todo == 0) {
-                        table[0][i].todo = '할일 다함' 
+                        table[0][i].todo = '예정 없음' 
                     } else {
                         table[0][i].todo = `${last_todo}개 남음`
                     }

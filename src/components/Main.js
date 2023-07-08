@@ -7,7 +7,6 @@ import { Mainstyle,StyleLi,StyleAddLi,Graph} from "../styles"
 export function Main ({DateInfo,setUpdating,Updating}) {
     let {year,month,date} = DateInfo
     let todoYear = year;
-    let [isWriting, setisWriting] = useState(false);
     let ALL_local = JSON.parse(localStorage.getItem(`${year}_${month}`)) || {}
     let local_list = ALL_local[date] || []
     let weeks = ['일','월','화','수','목','금','토']
@@ -112,7 +111,6 @@ export function Main ({DateInfo,setUpdating,Updating}) {
         startOfWeek.setDate(date.getDate() - dayOfWeek);
         const endOfWeek = new Date(startOfWeek);
         endOfWeek.setDate(startOfWeek.getDate() + 6);
-        console.log(startOfWeek.getDate(), endOfWeek.getDate());
         let week = 0;
         if(startOfWeek.getDate() <= endOfWeek.getDate()) {
             for(let i = startOfWeek.getDate(); i <= endOfWeek.getDate(); i++){
@@ -204,8 +202,6 @@ export function Main ({DateInfo,setUpdating,Updating}) {
         
         return arr;
     }
-    console.log(year, month, date, ALL_local)
-    console.log(MakeWeekRange(year,month,date,ALL_local));
     
     return (
         <Mainstyle>
@@ -248,13 +244,10 @@ export function Main ({DateInfo,setUpdating,Updating}) {
                     </StyleLi>
                         )
                     })}
-                    { !isWriting
-                    ? <StyleAddLi
+                    <StyleAddLi
                     onClick={AddLocal_list}
                     ><button>Add</button>
                     </StyleAddLi>
-                    : undefined}
-                    
                 </ul>
             </div>
 
